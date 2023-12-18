@@ -39,14 +39,15 @@ class Article extends Model
     public function toSearchableArray(): array
     {
         return [
-            'id' => (int) $this->id,
+            'id' => $this->getKey(),
             'title' => $this->title,
+            'description' => $this->description,
             'content' => $this->content,
         ];
     }
 
     protected function makeAllSearchableUsing(Builder $query)
     {
-        return $query->with(['category']);
+        return $query->with('category');
     }
 }
